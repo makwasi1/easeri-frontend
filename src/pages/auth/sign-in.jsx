@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react'
 import {
   Card,
   CardHeader,
@@ -9,8 +10,60 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
+import axios from 'axios';
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = 'csrftoken'
+axios.defaults.xsrfHeaderName = 'x-csrftoken'
 
 export function SignIn() {
+
+  const [bookList, setBookList] = useState([]);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  useEffect(() => {
+      setCSRF();
+      login();
+      fetchData()
+      console.log("auth")
+  }, []);
+
+
+  const setCSRF = async () => {
+    let csrfURL = "http://127.0.0.1:8000/api/setcsrf/";
+    const response = await axios.get(csrfURL);
+}
+
+const login = async (e) => {
+  e.preventDefault();
+  console.log(email);
+  let loginURL = "http://127.0.0.1:8000/api/login/";
+  const response = await axios.post(loginURL, { 
+      "username": email, "password": password });
+    
+      if (response.status == 200) {
+        navigate("/dashboard/home")
+      }
+      
+  }
+
+  const apiURL = "http://127.0.0.1:8000/api/listbooks/";
+  const fetchData = async () => {
+      const response = await axios.get(apiURL,
+          {'withCredentials': true });
+      console.log(response)
+      setBookList(response.data);
+      console.log(bookList);
+      console.log(response.data);
+  }
   const navigate = useNavigate();
   return (
     <>
@@ -30,21 +83,24 @@ export function SignIn() {
               Sign In
             </Typography>
           </CardHeader>
+          <form onSubmit={login}>
           <CardBody className="flex flex-col gap-4">
-            <Input type="email" label="Email" size="lg" />
-            <Input type="password" label="Password" size="lg" />
+            <Input type="text" label="Email" size="lg" value={email} onChange={handleEmailChange} />
+            <Input type="password" label="Password" size="lg" value={password} onChange={handlePasswordChange} />
             <div className="-ml-2.5">
               <Checkbox label="Remember Me" />
             </div>
           </CardBody>
           <CardFooter className="pt-0">
             <Button
-              onClick={() => navigate("/dashboard/home")}
+              // onClick={() => login()}
               variant="gradient"
+              type="submit"
               fullWidth
             >
               Sign In
             </Button>
+            
             <Typography variant="small" className="mt-6 flex justify-center">
               Don't have an account?
               <Link to="/auth/sign-up">
@@ -59,6 +115,7 @@ export function SignIn() {
               </Link>
             </Typography>
           </CardFooter>
+          </form>
         </Card>
       </div>
     </>

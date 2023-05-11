@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 
 import {
   Chip,
@@ -40,11 +40,42 @@ import {
   projectsTableData,
   ordersOverviewData,
 } from "@/data";
+import axios from 'axios';
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = 'csrftoken'
+axios.defaults.xsrfHeaderName = 'x-csrftoken'
 
 export function Home() {
   const [open, setOpen] = useState(false);
+  const [bookList, setBookList] = useState([]);
 
   const handleOpen = () => setOpen(!open);
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  const apiURL = "http://127.0.0.1:8000/api/listbooks/";
+  const fetchData = async () => {
+    const response = await axios.get(apiURL,
+      { 'withCredentials': true });
+    console.log(response)
+    setBookList(response.data);
+    console.log(bookList);
+    console.log(response.data);
+  }
+
+  const handleCreateProperty = async () => {
+    const api = 'http://127.0.0.1:8000/api/listbooks/'
+    const response = await axios.post(api, {
+      'title': 'Test 3',
+      'description': 'Test description',
+      'subscription_status': true
+    })
+    if (response.status == 200) {
+      navigate("/dashboard/home")
+    }
+  }
 
   return (
     <div className="mt-12">
@@ -66,23 +97,6 @@ export function Home() {
           />
         ))}
       </div>
-      {/* <div className="mb-6 grid grid-cols-1 gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
-        {statisticsChartsData.map((props) => (
-          <StatisticsChart
-            key={props.title}
-            {...props}
-            footer={
-              <Typography
-                variant="small"
-                className="flex items-center font-normal text-blue-gray-600"
-              >
-                <ClockIcon strokeWidth={2} className="h-4 w-4 text-inherit" />
-                &nbsp;{props.footer}
-              </Typography>
-            }
-          />
-        ))}
-      </div> */}
 
       <div className="mt-16 mb-8 flex flex-col gap-12">
         <Card>
@@ -108,34 +122,34 @@ export function Home() {
                 Add Property
               </Button>
               <Dialog open={open} handler={handleOpen}>
-                <DialogHeader>Add property</DialogHeader>
-                <DialogBody divider className="flex flex-col gap-y-5">
-                  <form className="mx-5 mt-8 mb-2 max-w-screen-lg">
+                <form onSubmit={handleCreateProperty} className="mx-5 mt-8 mb-2 max-w-screen-lg">
+                  <DialogHeader>Add property</DialogHeader>
+                  <DialogBody divider className="flex flex-col gap-y-5">
+
                     <div className="mb-4 flex flex-col gap-6">
                       <Input size="lg" label="Property Name" />
                       <Input type="number" size="lg" label="Payment Fee" />
-                      <Input
-                        type="datetime-local"
-                        size="lg"
-                        label="Date added"
-                      />
                       <Textarea variant="outlined" label="Notes" />
+                      <Input type="file" size="sm" label="Upload file" />
                     </div>
-                  </form>
-                </DialogBody>
-                <DialogFooter>
-                  <Button
-                    variant="text"
-                    color="red"
-                    onClick={handleOpen}
-                    className="mr-1"
-                  >
-                    <span>Cancel</span>
-                  </Button>
-                  <Button variant="gradient" color="green" onClick={handleOpen}>
-                    <span>Confirm</span>
-                  </Button>
-                </DialogFooter>
+
+                  </DialogBody>
+                  <DialogFooter>
+                    <Button
+                      variant="text"
+                      type="cancel"
+                      color="red"
+                      onClick={handleOpen}
+                      className="mr-1"
+                    >
+                      <span>Cancel</span>
+                    </Button>
+                    <Button variant="gradient" type="submit" color="green">
+                      <span>Confirm</span>
+                    </Button>
+
+                  </DialogFooter>
+                </form>
               </Dialog>
             </Fragment>
 
@@ -145,7 +159,7 @@ export function Home() {
             <table className="w-full min-w-[640px] table-auto">
               <thead>
                 <tr>
-                  {["Property", "notes", "status", "added", ""].map((el) => (
+                  {["Property Name", "notes", "status", "added", "action"].map((el) => (
                     <th
                       key={el}
                       className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -161,52 +175,47 @@ export function Home() {
                 </tr>
               </thead>
               <tbody>
-                {authorsTableData.map(
-                  ({ img, name, email, job, online, date }, key) => {
-                    const className = `py-3 px-5 ${
-                      key === authorsTableData.length - 1
+                {bookList.map(
+                  ({ id, title, description, subscription_status, created
+                  }, key) => {
+                    const className = `py-3 px-5 ${key === authorsTableData.length - 1
                         ? ""
                         : "border-b border-blue-gray-50"
-                    }`;
+                      }`;
 
                     return (
-                      <tr key={name}>
+                      <tr key={id}>
                         <td className={className}>
                           <div className="flex items-center gap-4">
-                            <Avatar src={img} alt={name} size="sm" />
+                            {/* <Avatar src={img} alt={name} size="sm" /> */}
                             <div>
                               <Typography
                                 variant="small"
                                 color="blue-gray"
                                 className="font-semibold"
                               >
-                                {name}
+                                {title}
                               </Typography>
-                              <Typography className="text-xs font-normal text-blue-gray-500">
-                                {email}
-                              </Typography>
+
                             </div>
                           </div>
                         </td>
                         <td className={className}>
                           <Typography className="text-xs font-semibold text-blue-gray-600">
-                            {job[0]}
-                          </Typography>
-                          <Typography className="text-xs font-normal text-blue-gray-500">
-                            {job[1]}
+                            {description}
                           </Typography>
                         </td>
                         <td className={className}>
                           <Chip
                             variant="gradient"
-                            color={online ? "green" : "blue-gray"}
-                            value={online ? "Paid" : "PENDING"}
+                            color={subscription_status ? "green" : "blue-gray"}
+                            value={subscription_status ? "Paid" : "PENDING"}
                             className="py-0.5 px-2 text-[11px] font-medium"
                           />
                         </td>
                         <td className={className}>
                           <Typography className="text-xs font-semibold text-blue-gray-600">
-                            {date}
+                            {created}
                           </Typography>
                         </td>
                         <td className={className}>
