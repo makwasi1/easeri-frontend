@@ -6,9 +6,9 @@ export default defineConfig({
   resolve: {
     alias: [{ find: "@", replacement: "/src" }],
   },
-  server: {
-    proxy:{
-      '/api': 'http://178.62.67.233:8000'
-    } , // Replace with your Django API endpoint
-  },
+  // server: {
+  //   proxy:{
+  //     '/api': 'http://178.62.67.233:8000'
+  //   } , // Replace with your Django API endpoint
+  // },
 });

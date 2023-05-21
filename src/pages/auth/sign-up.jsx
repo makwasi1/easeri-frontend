@@ -30,7 +30,7 @@ export function SignUp() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    let loginURL = "/api/users/register/";
+    let loginURL = "http://178.62.67.233:8000/api/users/register/";
     if(password === passwordConfirm){
       const response = await axios.post(
           loginURL, {
