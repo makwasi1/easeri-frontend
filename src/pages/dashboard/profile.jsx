@@ -22,7 +22,7 @@ export function Profile() {
 
   useEffect(() => {
     const username = localStorage.getItem('username')
-    setUser(username)
+    setUser('username')
   },[])
 
   return (
