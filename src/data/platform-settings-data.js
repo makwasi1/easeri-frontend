@@ -4,16 +4,8 @@ export const platformSettingsData = [
     options: [
       {
         checked: true,
-        label: "Email me when someone follows me",
-      },
-      {
-        checked: false,
-        label: "Email me when someone answers on my post",
-      },
-      {
-        checked: true,
-        label: "Email me when someone mentions me",
-      },
+        label: "Email me for alerts.",
+      }
     ],
   },
 ];
