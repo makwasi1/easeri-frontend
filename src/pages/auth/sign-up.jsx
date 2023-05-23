@@ -31,32 +31,32 @@ export function SignUp() {
   const onSubmit = async (e) => {
 
     e.preventDefault();
-    navigate("/auth/sign-in")
-    // let loginURL = "http://178.62.67.233:8000/api/users/register/";
-    // if(password === passwordConfirm){
-    //   const response = await axios.post(
-    //       loginURL, {
-    //         "username": username, "password": password, "email":email
-    //       }
-    //   );
-    //   if (response.status === 200) {
-    //     nlet loginURL = "http://178.62.67.233:8000/api/users/register/";
-    //     // if(password === passwordConfirm){
-    //     //   const response = await axios.post(
-    //     //       loginURL, {
-    //     //         "username": username, "password": password, "email":email
-    //     //       }
-    //     //   );
-    //     //   if (response.status === 200) {
-    //     //     navigate("/auth/sign-in")
-    //     //   }
-    //     // } else {
-    //     //   alert('Passwords do not match. Try again.')
-    //     // }avigate("/auth/sign-in")
-    //   }
-    // } else {
-    //   alert('Passwords do not match. Try again.')
-    // }
+    let loginURL = "http://178.62.67.233:8000/api/users/register/";
+    if(password === passwordConfirm){
+      const response = await axios.post(
+          loginURL, {
+            "username": username, "password": password, "email":email
+          }
+      );
+      if (response.status === 200) {
+        const loginURL = "http://178.62.67.233:8000/api/users/register/";
+        if(password === passwordConfirm){
+          const response = await axios.post(
+              loginURL, {
+                "username": username, "password": password, "email":email
+              }
+          );
+          if (response.status === 200) {
+            navigate("/auth/sign-in")
+          }
+        } else {
+          alert('Passwords do not match. Try again.')
+        }
+          navigate("/auth/sign-in")
+      }
+    } else {
+      alert('Passwords do not match. Try again.')
+    }
   }
 
 
