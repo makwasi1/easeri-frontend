@@ -31,7 +31,7 @@ export function SignUp() {
   const onSubmit = async (e) => {
 
     e.preventDefault();
-    let loginURL = "/api/users/register/";
+    const loginURL = "https://easeri-backend-production.up.railway.app/api/users/register/";
     if(password === passwordConfirm){
       const response = await axios.post(
           loginURL, {
@@ -39,7 +39,7 @@ export function SignUp() {
           }
       );
       if (response.status === 200) {
-        const loginURL = "/api/users/register/";
+       
         if(password === passwordConfirm){
           const response = await axios.post(
               loginURL, {

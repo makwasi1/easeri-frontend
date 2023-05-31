@@ -48,7 +48,7 @@ export function Home() {
   const navigate = useNavigate();
 
 
-  const apiURL = `/api/properties/`;
+  const apiURL = `https://easeri-backend-production.up.railway.app/api/properties/`;
 
 
   useEffect(() => {
