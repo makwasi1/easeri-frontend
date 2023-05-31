@@ -47,7 +47,7 @@ export function Tables() {
 
 
   const handleOpen = () => setOpen(!open);
-  const apiURL = `https://easeri-backend-production.up.railway.app/api/properties/`;
+  const apiURL = `/api/properties/`;
 
 
 
