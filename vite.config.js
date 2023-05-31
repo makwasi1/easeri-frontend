@@ -8,7 +8,9 @@ export default defineConfig({
   },
   server: {
     proxy:{
-      '/api': 'https://easeri-backend-production.up.railway.app'
+      '/api': 'http://164.90.185.233:8000/',
+      "secure": false,
+      
     } , // Replace with your Django API endpoint
   },
 });

@@ -124,6 +124,24 @@ export function Home() {
     }
   }
 
+  const handleSend = () => {
+    const message = {
+      name: name,
+      email: email,
+      description: description,
+    };
+    function reqListener() {
+      if (req.status === 201) {
+        setPage("thankyou");
+      }
+    }
+    var req = new XMLHttpRequest();
+    req.addEventListener("load", reqListener);
+    req.open("POST", "https://example.com/api/messages/", true);
+    req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    req.send(JSON.stringify(message));
+  };
+
 
 
   const fetchData = async () => {
