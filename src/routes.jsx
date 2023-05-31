@@ -8,6 +8,7 @@ import {
 } from "@heroicons/react/24/solid";
 import { Home, Profile, Tables, Notifications } from "@/pages/dashboard";
 import { SignIn, SignUp } from "@/pages/auth";
+import Landing from "./pages/auth/landing";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -59,6 +60,12 @@ export const routes = [
         name: "sign up",
         path: "/sign-up",
         element: <SignUp />,
+      },
+      {
+        icon: <UserPlusIcon {...icon} />,
+        name: "landing",
+        path: "/landing",
+        element: <Landing />,
       },
     ],
   },

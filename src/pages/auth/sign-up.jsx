@@ -31,7 +31,7 @@ export function SignUp() {
   const onSubmit = async (e) => {
 
     e.preventDefault();
-    let loginURL = "http://178.62.67.233:8000/api/users/register/";
+    let loginURL = "/api/users/register/";
     if(password === passwordConfirm){
       const response = await axios.post(
           loginURL, {
@@ -39,7 +39,7 @@ export function SignUp() {
           }
       );
       if (response.status === 200) {
-        const loginURL = "http://178.62.67.233:8000/api/users/register/";
+        const loginURL = "/api/users/register/";
         if(password === passwordConfirm){
           const response = await axios.post(
               loginURL, {
@@ -52,7 +52,6 @@ export function SignUp() {
         } else {
           alert('Passwords do not match. Try again.')
         }
-          navigate("/auth/sign-in")
       }
     } else {
       alert('Passwords do not match. Try again.')

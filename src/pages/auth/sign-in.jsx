@@ -63,7 +63,7 @@ export function SignIn() {
             </CardHeader>
             <form onSubmit={login}>
               <CardBody className="flex flex-col gap-4">
-                <Input type="text" label="Email" size="lg" value={email} onChange={handleEmailChange} />
+                <Input type="text" label="Username" size="lg" value={email} onChange={handleEmailChange} />
                 <Input type="password" label="Password" size="lg" value={password} onChange={handlePasswordChange} />
                 <div className="-ml-2.5">
                   <Checkbox label="Remember Me" />
