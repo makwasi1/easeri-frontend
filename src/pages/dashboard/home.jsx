@@ -130,7 +130,7 @@ export function Home() {
     setLoading(true)
     const username = localStorage.getItem('username')
     const token = localStorage.getItem('token')
-    const response = await axios.get(apiURL + username, {
+    const response = await axios.get(apiURL + username, {withCredentials:true}, {
       headers: {
         'Authorization': `Bearer ${token}`
       }
