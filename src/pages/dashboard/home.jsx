@@ -52,7 +52,7 @@ export function Home() {
 
 
   useEffect(() => {
-    fetchData()
+    // fetchData()
   }, [])
 
   const handleFileChange = (event) => {
