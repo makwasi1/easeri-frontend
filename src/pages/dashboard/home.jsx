@@ -48,7 +48,7 @@ export function Home() {
   const navigate = useNavigate();
 
 
-  const apiURL = `/api/properties/`;
+  const apiURL = `http://164.90.185.233:8000/api/properties/`;
 
 
   useEffect(() => {
