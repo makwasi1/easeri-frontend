@@ -52,10 +52,10 @@ export function Tables() {
 
 
   useEffect(() => {
-    fetchData().then(r => console.log("")).catch((e) => {
-      console.log(e)
-      navigate("/auth/sign-in")
-    });
+    // fetchData().then(r => console.log("")).catch((e) => {
+    //   console.log(e)
+    //   navigate("/auth/sign-in")
+    // });
   }, []);
 
   const fetchData = async () => {
