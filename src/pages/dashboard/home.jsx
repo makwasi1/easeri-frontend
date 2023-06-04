@@ -52,10 +52,7 @@ export function Home() {
 
 
   useEffect(() => {
-    fetchData().then(r => navigate("/dashboard/home")).catch((e) => {
-      console.log(e)
-      navigate("/auth/sign-in")
-    });
+    fetchData()
   }, [])
 
   const handleFileChange = (event) => {
