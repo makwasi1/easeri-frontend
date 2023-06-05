@@ -128,9 +128,10 @@ export function Home() {
   
   const fetchData = async () => {
     setLoading(true)
+    let apiURL = `https://easeri-backend-production.up.railway.app/api/properties/`;
     const username = localStorage.getItem('username')
     const token = localStorage.getItem('token')
-    const response = await axios.get(apiURL + username, {
+    const response = await axios.get(apiURL + username + '/', {
       headers: {
         'Authorization': `Bearer ${token}`
       }
