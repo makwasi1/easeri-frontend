@@ -32,6 +32,7 @@ export function SignUp() {
 
     e.preventDefault();
     const loginURL = "https://easeri-backend-production.up.railway.app/api/users/register/";
+    // const loginURL = "http://localhost:8000/api/users/register/";
     if(password === passwordConfirm){
       const response = await axios.post(
           loginURL, {

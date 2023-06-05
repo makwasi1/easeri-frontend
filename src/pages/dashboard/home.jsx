@@ -49,6 +49,8 @@ export function Home() {
 
 
   const apiURL = `https://easeri-backend-production.up.railway.app/api/properties/`;
+  // const apiURL = `/api/properties/`;
+
 
 
   useEffect(() => {
@@ -74,13 +76,14 @@ export function Home() {
     formData.append('title', newTitle);
     formData.append('description', desc);
     formData.append('subscription_status', false)
+    const token = localStorage.getItem('token')
     setLoading(true)
 
     try {
       const response = await axios.post(apiURL, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          'Authorization': `Bearer ${userToken}`
+          'Authorization': `Bearer ${token}`
         }
       });
       if (response.status === 201) {
@@ -101,17 +104,18 @@ export function Home() {
     formData.append('title', newTitle);
     formData.append('description', desc);
     formData.append('subscription_status', false)
+    const token = localStorage.getItem('token')
     setLoading(true)
 
     try {
       const response = await axios.post(apiURL, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          'Authorization': `Bearer ${userToken}`
+          'Authorization': `Bearer ${token}`
         }
       });
       if (response.status === 201) {
-        alert("Property Has been added.")
+        alert("Property Has been Edited.")
         setOpen(false)
         setLoading(false)
       }
