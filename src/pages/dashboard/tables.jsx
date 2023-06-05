@@ -55,21 +55,20 @@ export function Tables() {
     fetchData();
   }, []);
 
+
+
   const fetchData = async () => {
+    
+    let apiURL = `https://easeri-backend-production.up.railway.app/api/properties/`;
     const username = localStorage.getItem('username')
     const token = localStorage.getItem('token')
-    
-    const response = await axios.get(apiURL + username, {
+    const response = await axios.get(apiURL + username + '/', {
       headers: {
         'Authorization': `Bearer ${token}`
       }
     });
-    if(response == 200){
-      setUserProperties(response.data);
-    } else {
-      navigate("/auth/sign-in")
-    }
-    
+    setUserProperties(response.data);
+   
   }
 
 

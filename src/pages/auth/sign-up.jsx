@@ -39,10 +39,10 @@ export function SignUp() {
             "username": username, "password": password, "email":email
           }
       );
-      if(response.status === 201){
-        setTimeout(() => {
+      if(response.status === 201 || response.status === 200){
           navigate("/auth/sign-in")
-        }, 2000)
+      } else {
+        alert('Something went wrong. Try again.')
       }
     } else {
       alert('Passwords do not match. Try again.')

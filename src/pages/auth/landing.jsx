@@ -11,7 +11,13 @@ export default function Landing() {
       <div id="hero" class="w-full bg-[#011E11]">
         <div className="container flex-col min-h-screen mx-auto flex xl:px-5 py-10">
           <div className="nav capitalize py-5 text-[#12FF46] font-bold px-5 md:px-0">
-            aesari - diaspora property alliance
+          <img
+                src={"/img/logo.png"}
+                alt
+                width="120"
+                height="50"
+              />
+            diaspora property alliance
           </div>
           <div className="flex-1 flex flex-col md:flex-row">
             <div
@@ -39,10 +45,12 @@ export default function Landing() {
               className="flex-1 flex flex-col justify-center md:px-0 px-5 md:pb-0 py-5"
             >
               <img
-                src={"../public/img/3.png"}
+                src={"/img/3.png"}
                 alt
                 width="500"
                 height="300"
+                style={{objectFit: 'contain'}}
+                border="0"
               />
             </div>
           </div>
@@ -59,7 +67,7 @@ export default function Landing() {
             className="flex-1 flex flex-col justify-center md:px-0 p-5"
           >
             <img
-                src={"../public/img/2.png"}
+                src={"/img/2.png"}
                 alt
                 width="500"
                 height="300"
@@ -221,13 +229,7 @@ export default function Landing() {
       {/* end why */}
 
       {/* explanation */}
-      <div id="third" class="w-full bg-[#011E11]">
-        <div className="container justify-center min-h-screen mx-auto flex flex-col gap-y-10 py-10">
-          <h1 className="text-4xl text-[#12FF46] text-center font-black">
-            Why Aesari
-          </h1>
-        </div>
-      </div>
+    
 
       {/* end explanation */}
 
