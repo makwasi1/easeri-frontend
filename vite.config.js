@@ -6,11 +6,11 @@ export default defineConfig({
   resolve: {
     alias: [{ find: "@", replacement: "/src" }],
   },
-  server: {
-    proxy:{
-      '/api': 'https://easeri-backend-production.up.railway.app/',
-      "secure": false,
+  // server: {
+  //   proxy:{
+  //     '/api': 'https://easeri-backend-production.up.railway.app/',
+  //     "secure": false,
       
-    } , // Replace with your Django API endpoint
-  },
+  //   } , // Replace with your Django API endpoint
+  // },
 });
