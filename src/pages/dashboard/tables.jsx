@@ -52,10 +52,7 @@ export function Tables() {
 
 
   useEffect(() => {
-    // fetchData().then(r => console.log("")).catch((e) => {
-    //   console.log(e)
-    //   navigate("/auth/sign-in")
-    // });
+    fetchData();
   }, []);
 
   const fetchData = async () => {
@@ -67,7 +64,12 @@ export function Tables() {
         'Authorization': `Bearer ${token}`
       }
     });
-    setUserProperties(response.data);
+    if(response == 200){
+      setUserProperties(response.data);
+    } else {
+      navigate("/auth/sign-in")
+    }
+    
   }
 
 

@@ -48,11 +48,11 @@ export function Home() {
   const navigate = useNavigate();
 
 
-  const apiURL = `/api/properties/`;
+  const apiURL = `https://easeri-backend-production.up.railway.app/api/properties/`;
 
 
   useEffect(() => {
-    // fetchData()
+    fetchData()
   }, [])
 
   const handleFileChange = (event) => {
@@ -121,31 +121,12 @@ export function Home() {
     }
   }
 
-  const handleSend = () => {
-    const message = {
-      name: name,
-      email: email,
-      description: description,
-    };
-    function reqListener() {
-      if (req.status === 201) {
-        setPage("thankyou");
-      }
-    }
-    var req = new XMLHttpRequest();
-    req.addEventListener("load", reqListener);
-    req.open("POST", "https://example.com/api/messages/", true);
-    req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    req.send(JSON.stringify(message));
-  };
-
-
-
+  
   const fetchData = async () => {
     setLoading(true)
     const username = localStorage.getItem('username')
     const token = localStorage.getItem('token')
-    const response = await axios.get(apiURL + username, {withCredentials:true}, {
+    const response = await axios.get(apiURL + username, {
       headers: {
         'Authorization': `Bearer ${token}`
       }

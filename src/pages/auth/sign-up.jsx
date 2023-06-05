@@ -38,20 +38,10 @@ export function SignUp() {
             "username": username, "password": password, "email":email
           }
       );
-      if (response.status === 200) {
-       
-        if(password === passwordConfirm){
-          const response = await axios.post(
-              loginURL, {
-                "username": username, "password": password, "email":email
-              }
-          );
-          if (response.status === 200) {
-            navigate("/auth/sign-in")
-          }
-        } else {
-          alert('Passwords do not match. Try again.')
-        }
+      if(response.status === 201){
+        setTimeout(() => {
+          navigate("/auth/sign-in")
+        }, 2000)
       }
     } else {
       alert('Passwords do not match. Try again.')
