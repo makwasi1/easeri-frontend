@@ -43,19 +43,20 @@ export default function Landing() {
           <div className="flex-1 flex flex-col md:flex-row">
             <div
               id="left"
-              className="flex-1 flex flex-col justify-center gap-y-5 md:items-start items-center md:text-left text-center"
+              className="flex-1 flex flex-col justify-center gap-y-5 md:items-start items-center md:text-left text-center pr-10"
             >
-
-              <p className="text-white " >
-                The Diaspora Property Fraud Alert system is a
-                proprietary system <br /> that helps protect your property
-                against fraud by monitoring documents,<br /> such as liens,
-                deeds and mortgage/loan applications recorded
-                against a land title.
+              <p className="text-white">
+                The Diaspora Property Fraud Alert system is a proprietary system
+                <br />
+                that helps protect your property against fraud by monitoring
+                documents,
+                <br />
+                such as liens, deeds, and mortgage/loan applications recorded <br /> against
+                a land title.
               </p>
               <h3 className="text-4xl text-white font-black">
-                Take Action and <br />
-                Stop being a victim
+                Take Action and
+                <b> STOP</b>  <br /> being a victim
               </h3>
               <div>
                 <input
@@ -64,7 +65,7 @@ export default function Landing() {
                   value="Register your property"
                   cursor="pointer"
                   onClick={() => {
-                    navigate("/auth/sign-in")
+                    navigate("/auth/sign-in");
                   }}
                 />
               </div>
@@ -83,6 +84,7 @@ export default function Landing() {
               />
             </div>
           </div>
+
         </div>
       </div>
       {/* end hero */}
@@ -311,8 +313,13 @@ export default function Landing() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className=" p-4">
                 <h1 className="text-4xl  text-[#12FF46] font-black">
-                  What Aesari Can Do For You
+                  Dont Miss out
                 </h1>
+                <br />
+                <h3 className="text-2xl  text-[#12FF46] font-black">
+                  Send us a message
+                </h3>
+
                 <form className="mb-4">
                   <div className="mb-2">
                     <label className="block mb-1 text-white" htmlFor="name">Name</label>
@@ -336,11 +343,11 @@ export default function Landing() {
                     }}
                   />
                 </form>
-                
-        
+
+
               </div>
               <div className="p-4">
-                
+
                 <h3 className="mb-2 text-white">Start one month free trial</h3>
                 <input
                   type="button"
@@ -351,25 +358,26 @@ export default function Landing() {
                     navigate("/auth/sign-in")
                   }}
                 />
-                <div className="flex mb-7">
-                  <a href="#" className="mr-4">
-                    <i className="fab fa-facebook"></i>
-                  </a>
-                  <a href="#" className="mr-2">
-                    <i className="fab fa-whatsapp"></i>
-                  </a>
-                  <a href="#" className="mr-2">
-                    <i className="fab fa-twitter"></i>
-                  </a>
-                </div>
-                <div className="mb-2">
+
+                <div className="mb-2 ">
                   <h4 className="text-lg font-bold text-white mb-1">Contact Information</h4>
                   <p className="text-gray-500">123 Main Street, New York, USA</p>
                   <p className="text-gray-500">Phone: 123-456-7890</p>
                   <p className="text-gray-500">Email: info@example.com</p>
                 </div>
-                <a href="#" className="text-sm text-blue-500">Privacy Policy</a>
-            </div>
+                <br />
+                <div className="flex flex-wrap mb-7">
+                  <a href="#" className="mr-4 text-white text-2xl">
+                    <i className="fab fa-facebook"></i>
+                  </a>
+                  <a href="#" className="mr-4 text-white text-2xl">
+                    <i className="fab fa-whatsapp"></i>
+                  </a>
+                  <a href="#" className="mr-4 text-white text-2xl">
+                    <i className="fab fa-twitter"></i>
+                  </a>
+                </div>
+              </div>
             </div>
             <div
               id="right"
@@ -381,7 +389,7 @@ export default function Landing() {
                 width="500"
                 height="300"
               /> */}
-              </div>
+            </div>
             <div
               id="right"
               className="flex-1 flex flex-col justify-center md:px-0 px-5 md:pb-0 py-5"
@@ -397,6 +405,7 @@ export default function Landing() {
         </div>
       </div>
 
+    
       {/* end footer */}
     </main>
   );
