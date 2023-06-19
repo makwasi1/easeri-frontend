@@ -12,6 +12,10 @@ export function Footer({ brandName, brandLink, routes }) {
           &copy; {year} with {"Aesari"}
          {/* <HeartIcon className="-mt-0.5 inline-block h-3.5 w-3.5" />*/}
         </Typography>
+        <Typography variant="small" className="font-normal text-inherit">
+         Privacy Policy
+         {/* <HeartIcon className="-mt-0.5 inline-block h-3.5 w-3.5" />*/}
+        </Typography>
         <ul className="flex items-center gap-4">
           {routes.map(({ name, path }) => (
             <li key={name}>

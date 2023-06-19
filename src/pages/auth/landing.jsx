@@ -306,16 +306,18 @@ export default function Landing() {
       </div>
       {/* end testimonial */}
 
+
       {/* footer */}
       <div id="hero" class="w-full bg-[#011E11]">
         <div className="container flex-col  mx-auto flex xl:px-5 py-10">
+          <h1 className="text-4xl  text-[#12FF46] font-black">
+            Dont Miss out
+          </h1>
           <div className="container mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className=" p-4">
-                <h1 className="text-4xl  text-[#12FF46] font-black">
-                  Dont Miss out
-                </h1>
-                <br />
+
+
                 <h3 className="text-2xl  text-[#12FF46] font-black">
                   Send us a message
                 </h3>
@@ -349,6 +351,7 @@ export default function Landing() {
               <div className="p-4">
 
                 <h3 className="mb-2 text-white">Start one month free trial</h3>
+                <br />
                 <input
                   type="button"
                   className="py-2 px-5 bg-[#FAFF12] rounded-2xl uppercase"
@@ -359,11 +362,17 @@ export default function Landing() {
                   }}
                 />
 
+
+
+
                 <div className="mb-2 ">
+                  <br />
                   <h4 className="text-lg font-bold text-white mb-1">Contact Information</h4>
-                  <p className="text-gray-500">123 Main Street, New York, USA</p>
-                  <p className="text-gray-500">Phone: 123-456-7890</p>
-                  <p className="text-gray-500">Email: info@example.com</p>
+
+                  <p className="text-gray-500">71 Shelton Street, London, UK</p>
+                  <p className="text-gray-500">WC2H 9JH</p>
+                  <p className="text-gray-500">Tell: +44 (0) 333 772 1675</p>
+                  <p className="text-gray-500">Email: info@aesari.com</p>
                 </div>
                 <br />
                 <div className="flex flex-wrap mb-7">
@@ -405,7 +414,7 @@ export default function Landing() {
         </div>
       </div>
 
-    
+
       {/* end footer */}
     </main>
   );
