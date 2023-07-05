@@ -26,20 +26,20 @@ export function SignIn() {
 
   const login = async (e) => {
     e.preventDefault();
-    let loginURL = "https://easeri-backend-production.up.railway.app/api/users/login/";
-    // let loginURL = "/api/users/login/";
-    const response = await axios.post(
-        loginURL, {
-          "username": email, "password": password
-        }
-    );
+    // let loginURL = "https://easeri-backend-production.up.railway.app/api/users/login/";
+    // // let loginURL = "/api/users/login/";
+    // const response = await axios.post(
+    //     loginURL, {
+    //       "username": email, "password": password
+    //     }
+    // );
 
-    if (response.status === 200) {
-      localStorage.setItem('username', email)
-      localStorage.setItem('token', response.data['access'])
-      navigate("/dashboard/home")
-    }
-    // navigate("/dashboard/home")
+    // if (response.status === 200) {
+    //   localStorage.setItem('username', email)
+    //   localStorage.setItem('token', response.data['access'])
+    //   navigate("/dashboard/home")
+    // }
+    navigate("/dashboard/home")
   }
 
 

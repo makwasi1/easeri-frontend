@@ -87,7 +87,7 @@ export function Sidenav({ brandImg, brandName, routes }) {
               </li>
             ))}
           </ul>
-        ))}
+        ))[0]}
       </div>
     </aside>
   );

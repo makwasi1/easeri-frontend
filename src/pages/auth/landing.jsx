@@ -1,3 +1,4 @@
+import Pricing from '@/utils/pricing';
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 
@@ -302,6 +303,12 @@ export default function Landing() {
               </div>
             </div>
           ))}
+        </div>
+      </div>
+
+      <div id="testimonial" class="w-full ">
+        <div className="container flex-col  mx-auto flex xl:px-5 py-10">
+          <Pricing />
         </div>
       </div>
       {/* end testimonial */}
