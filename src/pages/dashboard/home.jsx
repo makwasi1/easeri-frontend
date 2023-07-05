@@ -143,7 +143,13 @@ export function Home() {
   const handleOpen = () => setOpen(!open);
   const handleOpenEdit = () => setEdit(!edit);
 
+  //check if user is logged in 
+   
+
   useEffect(() => {
+    // if (!localStorage.getItem('token')) {
+    //   navigate('/login')
+    // }
     fetchData()
   }, [])
 
