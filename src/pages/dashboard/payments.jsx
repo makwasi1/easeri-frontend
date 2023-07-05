@@ -78,7 +78,7 @@ function formatExpires(value) {
     .replace(/^([0-1]{1}[0-9]{1})([0-9]{1,2}).\*/g, "$1/$2");
 }
 
-export function Tables() {
+export function PaymentsTable() {
   const [open, setOpen] = useState(false);
   const [userProperties, setUserProperties] = useState([])
   const navigate = useNavigate();
@@ -88,19 +88,12 @@ export function Tables() {
   const [cardExpires, setCardExpires] = React.useState("");
 
 
-
-
-
   const handleOpen = () => setOpen(!open);
   const apiURL = `https://easeri-backend-production.up.railway.app/api/properties/`;
-
-
 
   useEffect(() => {
     fetchData();
   }, []);
-
-
 
   const fetchData = async () => {
 
@@ -128,14 +121,14 @@ export function Tables() {
         >
           <div>
             <Typography variant="h6" color="blue-gray" className="mb-1">
-              Payments
+            Subscription Status 
             </Typography>
             <Typography
               variant="small"
               className="flex items-center gap-1 font-normal text-blue-gray-600"
             >
               <CheckIcon strokeWidth={3} className="h-4 w-4 text-blue-500" />
-              <strong>30 done</strong> this month
+             
             </Typography>
           </div>
 
@@ -336,45 +329,48 @@ export function Tables() {
                     }`;
 
                   return (
-                    <tr key={name}>
-                      <td className={className}>
-                        <div className="flex items-center gap-4">
-                          {/*<Avatar src={img} alt={name} size="sm" />*/}
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-bold"
-                          >
-                            {name}
-                          </Typography>
-                        </div>
-                      </td>
+                    <center>
+                     
+                    </center>
+                    // <tr key={name}>
+                    //   <td className={className}>
+                    //     <div className="flex items-center gap-4">
+                    //       {/*<Avatar src={img} alt={name} size="sm" />*/}
+                    //       <Typography
+                    //         variant="small"
+                    //         color="blue-gray"
+                    //         className="font-bold"
+                    //       >
+                    //         {name}
+                    //       </Typography>
+                    //     </div>
+                    //   </td>
 
-                      <td className={className}>
-                        <Typography
-                          variant="small"
-                          className="text-xs font-medium text-blue-gray-600"
-                        >
-                          {budget}
-                        </Typography>
-                      </td>
-                      <td className={className}>
-                        <div className="w-10/12">
-                          <Typography
-                            variant="small"
-                            className="mb-1 block text-xs font-medium text-blue-gray-600"
-                          >
-                            {completion}%
-                          </Typography>
-                          <Progress
-                            value={completion}
-                            variant="gradient"
-                            color={completion === 100 ? "green" : "blue"}
-                            className="h-1"
-                          />
-                        </div>
-                      </td>
-                    </tr>
+                    //   <td className={className}>
+                    //     <Typography
+                    //       variant="small"
+                    //       className="text-xs font-medium text-blue-gray-600"
+                    //     >
+                    //       {budget}
+                    //     </Typography>
+                    //   </td>
+                    //   <td className={className}>
+                    //     <div className="w-10/12">
+                    //       <Typography
+                    //         variant="small"
+                    //         className="mb-1 block text-xs font-medium text-blue-gray-600"
+                    //       >
+                    //         {completion}%
+                    //       </Typography>
+                    //       <Progress
+                    //         value={completion}
+                    //         variant="gradient"
+                    //         color={completion === 100 ? "green" : "blue"}
+                    //         className="h-1"
+                    //       />
+                    //     </div>
+                    //   </td>
+                    // </tr>
                   );
                 }
               )}
@@ -387,4 +383,4 @@ export function Tables() {
   );
 }
 
-export default Tables;
+export default PaymentsTable;

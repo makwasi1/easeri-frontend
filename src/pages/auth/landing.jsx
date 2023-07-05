@@ -30,6 +30,55 @@ export default function Landing() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between  bg-white">
       {/* hero */}
+
+      {/* <div className="relative pt-16 pb-32 w-full flex content-center items-center justify-center"
+            style={{
+              minHeight: "75vh"
+            }}>
+          <div className="absolute top-0 w-full h-full bg-center bg-cover"
+              style={{
+                backgroundImage: "url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2873&q=80')"
+              }}>
+            <span id="blackOverlay" className="w-full h-full absolute opacity-75 bg-black"></span>
+          </div>
+          <div className="container relative mx-auto">
+              <div className="items-center flex flex-wrap">
+                <div className="w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
+                  <div className="pr-12">
+                    <h1 className="text-white font-semibold text-5xl">
+                      Your story starts with us.
+                    </h1>
+                    <p className="mt-4 text-lg text-gray-300">
+                      This is a simple example of a Landing Page you can build
+                      using Tailwind Starter Kit. It features multiple CSS
+                      components based on the Tailwindcss design system.
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+          </div>
+          <div
+            className="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden"
+            style={{ height: "70px" }}
+          >
+            <svg
+              className="absolute bottom-0 overflow-hidden"
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="none"
+              version="1.1"
+              viewBox="0 0 2560 100"
+              x="0"
+              y="0"
+            >
+              <polygon
+                className="text-gray-300 fill-current"
+                points="2560 0 2560 100 0 100"
+              ></polygon>
+            </svg>
+          </div>
+        </div> */}
+
       <div id="hero" class="w-full bg-[#011E11]">
         <div className="container flex-col min-h-screen mx-auto flex xl:px-5 py-10">
           <div className="nav capitalize py-5 text-[#12FF46] font-bold px-5 md:px-0">
@@ -46,7 +95,7 @@ export default function Landing() {
               id="left"
               className="flex-1 flex flex-col justify-center gap-y-5 md:items-start items-center md:text-left text-center pr-10"
             >
-              <p className="text-white">
+              <p className="text-white mt-4 text-lg text-gray-300">
                 The Diaspora Property Fraud Alert system is a proprietary system
                 <br />
                 that helps protect your property against fraud by monitoring
@@ -55,7 +104,7 @@ export default function Landing() {
                 such as liens, deeds, and mortgage/loan applications recorded <br /> against
                 a land title.
               </p>
-              <h3 className="text-4xl text-white font-black">
+              <h3 className="text-white font-semibold text-5xl text-white font-black">
                 Take Action and
                 <b> STOP</b>  <br /> being a victim
               </h3>
@@ -63,7 +112,7 @@ export default function Landing() {
                 <input
                   type="button"
                   className="py-2 px-5 bg-[#FAFF12] rounded-2xl uppercase"
-                  value="Register your property"
+                  value="Start Now (30 days free)"
                   cursor="pointer"
                   onClick={() => {
                     navigate("/auth/sign-in");

@@ -5,10 +5,11 @@ import {
   BellIcon,
   Cog6ToothIcon,
   ArrowRightOnRectangleIcon,
+  BanknotesIcon,
   UserPlusIcon,
 } from "@heroicons/react/24/solid";
 
-import { Home, Profile, Tables, Notifications } from "@/pages/dashboard";
+import { Home, Profile, PaymentsTable, Notifications } from "@/pages/dashboard";
 import { SignIn, SignUp } from "@/pages/auth";
 import Landing from "./pages/auth/landing";
 import ContactUs from "./pages/contact-us";
@@ -28,16 +29,10 @@ export const routes = [
         element: <Home />,
       },
       {
-        icon: <TableCellsIcon {...icon} />,
+        icon: <BanknotesIcon {...icon} />,
         name: "Payments",
         path: "/tables",
-        element: <Tables />,
-      },
-      {
-        icon: <UserCircleIcon {...icon} />,
-        name: "profile",
-        path: "/profile",
-        element: <Profile />,
+        element: <PaymentsTable />,
       },
 
       {
@@ -46,6 +41,15 @@ export const routes = [
         path: "/notifications",
         element: <Notifications />,
       },
+
+      {
+        icon: <UserCircleIcon {...icon} />,
+        name: "profile",
+        path: "/profile",
+        element: <Profile />,
+      },
+
+      
 
       {
         icon: <Cog6ToothIcon {...icon} />,

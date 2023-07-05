@@ -4,6 +4,7 @@ import {
   CardHeader,
   CardBody,
   Typography,
+  Button,
   Input,
 } from "@material-tailwind/react";
 
@@ -42,6 +43,8 @@ export function ProfileInfoCard({ title, description, details, action }) {
             ))}
           </ul>
         )}
+        <br></br>
+        <Button>Update Profile</Button>
       </CardBody>
     </Card>
   );
