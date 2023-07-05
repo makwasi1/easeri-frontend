@@ -24,7 +24,7 @@ import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 import { authorsTableData } from "@/data";
 import React, { Fragment, useState, useEffect } from "react";
 import axios from 'axios';
-import { useCountries } from "use-react-countries";
+// import { useCountries } from "use-react-countries";
 import {
   BanknotesIcon,
   CreditCardIcon,
@@ -82,7 +82,7 @@ export function PaymentsTable() {
   const [open, setOpen] = useState(false);
   const [userProperties, setUserProperties] = useState([])
   const navigate = useNavigate();
-  const { countries } = useCountries();
+  // const { countries } = useCountries();
   const [type, setType] = React.useState("card");
   const [cardNumber, setCardNumber] = React.useState("");
   const [cardExpires, setCardExpires] = React.useState("");
@@ -246,11 +246,11 @@ export function PaymentsTable() {
                             </Typography>
 
                             <Select label="Country" menuProps={{ className: "h-48" }}>
-                              {countries.map(({ name }) => (
-                                <Option key={name} value={name}>
-                                  {name}
+                              
+                                <Option  value="">
+                                  --Select Country--
                                 </Option>
-                              ))}
+                            
                             </Select>
                             <Input
                               label="Postal Code"
