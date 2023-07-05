@@ -143,6 +143,11 @@ export function Home() {
   const handleOpen = () => setOpen(!open);
   const handleOpenEdit = () => setEdit(!edit);
 
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+
   return (
     <div className="mt-12">
       <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
@@ -188,6 +193,8 @@ export function Home() {
                 Add Property
               </Button>
               <Dialog open={open} handler={handleOpen}>
+                
+
                 <form onSubmit={handleCreateProperty} className="mx-5 mt-8 mb-2 max-w-screen-lg">
                   <DialogHeader>Add property</DialogHeader>
                   <DialogBody divider className="flex flex-col gap-y-5">
@@ -268,6 +275,7 @@ export function Home() {
                         <td className={className}>
                           <Typography className="text-xs font-semibold text-blue-gray-600">
                             {description}
+                            {description}
                           </Typography>
                         </td>
                         <td className={className}>
@@ -280,7 +288,7 @@ export function Home() {
                         </td>
                         <td className={className}>
                           <Typography className="text-xs font-semibold text-blue-gray-600">
-                            {formatDate(created)}
+                            {date}
                           </Typography>
                         </td>
                         <td className={className}>

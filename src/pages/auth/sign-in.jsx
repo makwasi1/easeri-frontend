@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react'
 import {
   Card,
   CardHeader,
@@ -9,7 +10,7 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
-import {useEffect, useState} from "react";
+
 import axios from "axios";
 
 export function SignIn() {
@@ -39,10 +40,10 @@ export function SignIn() {
       localStorage.setItem('token', response.data['access'])
       navigate("/dashboard/home")
     }
-    // navigate("/dashboard/home")
+    navigate("/dashboard/home")
   }
 
-
+ 
   const navigate = useNavigate();
   return (
       <>

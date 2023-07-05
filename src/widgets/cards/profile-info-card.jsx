@@ -4,6 +4,7 @@ import {
   CardHeader,
   CardBody,
   Typography,
+  Input,
 } from "@material-tailwind/react";
 
 export function ProfileInfoCard({ title, description, details, action }) {
@@ -36,23 +37,7 @@ export function ProfileInfoCard({ title, description, details, action }) {
           <ul className="flex flex-col gap-4 p-0">
             {Object.keys(details).map((el, key) => (
               <li key={key} className="flex items-center gap-4">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="font-semibold capitalize"
-                >
-                  {el}:
-                </Typography>
-                {typeof details[el] === "string" ? (
-                  <Typography
-                    variant="small"
-                    className="font-normal text-blue-gray-500"
-                  >
-                    {details[el]}
-                  </Typography>
-                ) : (
-                  details[el]
-                )}
+                <Input size="sm" value={details[el]}label={el} />
               </li>
             ))}
           </ul>

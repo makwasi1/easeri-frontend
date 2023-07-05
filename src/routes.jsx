@@ -3,12 +3,15 @@ import {
   UserCircleIcon,
   TableCellsIcon,
   BellIcon,
+  Cog6ToothIcon,
   ArrowRightOnRectangleIcon,
   UserPlusIcon,
 } from "@heroicons/react/24/solid";
+
 import { Home, Profile, Tables, Notifications } from "@/pages/dashboard";
 import { SignIn, SignUp } from "@/pages/auth";
 import Landing from "./pages/auth/landing";
+import ContactUs from "./pages/contact-us";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -39,9 +42,16 @@ export const routes = [
 
       {
         icon: <BellIcon {...icon} />,
-        name: "notifications",
+        name: "History",
         path: "/notifications",
         element: <Notifications />,
+      },
+
+      {
+        icon: <Cog6ToothIcon {...icon} />,
+        name: "Contact Us",
+        path: "/contact-us",
+        element: <ContactUs />,
       },
     ],
   },
