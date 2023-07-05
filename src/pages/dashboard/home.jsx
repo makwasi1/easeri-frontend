@@ -147,9 +147,9 @@ export function Home() {
    
 
   useEffect(() => {
-    // if (!localStorage.getItem('token')) {
-    //   navigate('/login')
-    // }
+    if (!localStorage.getItem('token')) {
+      navigate('/login')
+    }
     fetchData()
   }, [])
 
