@@ -11,6 +11,7 @@ import {
 import { Home, Profile, Tables, Notifications } from "@/pages/dashboard";
 import { SignIn, SignUp } from "@/pages/auth";
 import Landing from "./pages/auth/landing";
+import ContactUs from "./pages/contact-us";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -48,9 +49,9 @@ export const routes = [
 
       {
         icon: <Cog6ToothIcon {...icon} />,
-        name: "Settings",
-        path: "/notifications",
-        element: <Notifications />,
+        name: "Contact Us",
+        path: "/contact-us",
+        element: <ContactUs />,
       },
     ],
   },

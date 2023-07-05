@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react'
 import {
   Card,
   CardHeader,
@@ -9,7 +10,7 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
-import {useEffect, useState} from "react";
+
 import axios from "axios";
 
 export function SignIn() {
@@ -26,19 +27,19 @@ export function SignIn() {
 
   const login = async (e) => {
     e.preventDefault();
-    // let loginURL = "https://easeri-backend-production.up.railway.app/api/users/login/";
-    // // let loginURL = "/api/users/login/";
-    // const response = await axios.post(
-    //     loginURL, {
-    //       "username": email, "password": password
-    //     }
-    // );
+    let loginURL = "https://easeri-backend-production.up.railway.app/api/users/login/";
+    // let loginURL = "/api/users/login/";
+    const response = await axios.post(
+        loginURL, {
+          "username": email, "password": password
+        }
+    );
 
-    // if (response.status === 200) {
-    //   localStorage.setItem('username', email)
-    //   localStorage.setItem('token', response.data['access'])
-    //   navigate("/dashboard/home")
-    // }
+    if (response.status === 200) {
+      localStorage.setItem('username', email)
+      localStorage.setItem('token', response.data['access'])
+      navigate("/dashboard/home")
+    }
     navigate("/dashboard/home")
   }
 
