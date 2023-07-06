@@ -151,7 +151,7 @@ export function Home() {
       navigate('/login')
     }
     fetchData()
-  }, [])
+  }, [loading])
 
 
   return (
@@ -294,7 +294,7 @@ export function Home() {
                         </td>
                         <td className={className}>
                           <Typography className="text-xs font-semibold text-blue-gray-600">
-                            {date}
+                            {created}
                           </Typography>
                         </td>
                         <td className={className}>
