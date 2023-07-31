@@ -31,12 +31,12 @@ export function SignUp() {
   const onSubmit = async (e) => {
 
     e.preventDefault();
-    const loginURL = "https://easeri-backend-production.up.railway.app/api/users/register/";
-    // const loginURL = "http://localhost:8000/api/users/register/";
+    // const loginURL = "https://easeri-backend-production.up.railway.app/api/users/register/";
+    const loginURL = "http://localhost:3000/auth/register/";
     if(password === passwordConfirm){
       const response = await axios.post(
           loginURL, {
-            "username": username, "password": password, "email":email
+            "name": username, "password": password, "email":email
           }
       );
       if(response.status === 201 || response.status === 200){

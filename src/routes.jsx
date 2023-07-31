@@ -49,8 +49,6 @@ export const routes = [
         element: <Profile />,
       },
 
-      
-
       {
         icon: <Cog6ToothIcon {...icon} />,
         name: "Contact Us",

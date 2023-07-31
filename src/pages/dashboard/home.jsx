@@ -48,14 +48,14 @@ export function Home() {
   const navigate = useNavigate();
 
 
-  const apiURL = `https://easeri-backend-production.up.railway.app/api/properties/`;
+  // const apiURL = `https://easeri-backend-production.up.railway.app/api/properties/`;
   // const apiURL = `/api/properties/`;
 
 
 
   useEffect(() => {
     fetchData()
-  }, [])
+  }, [open])
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -70,20 +70,28 @@ export function Home() {
   };
 
   const handleCreateProperty = async (event) => {
+    let apiURL = `http://localhost:3000/property/`;
     event.preventDefault();
-    const formData = new FormData();
-    formData.append('image', selectedFile);
-    formData.append('title', newTitle);
-    formData.append('description', desc);
-    formData.append('subscription_status', false)
     const token = localStorage.getItem('token')
+    const userId = localStorage.getItem('userId')
     setLoading(true)
+    //create a date object
+    const date = new Date();
 
     try {
-      const response = await axios.post(apiURL, formData, {
+      const response = await axios.post(apiURL, {
+      
+          "propertyName":newTitle,
+          "plotNumber": "",
+          "description": desc,
+          "status": "Pending",
+          "userId": userId,
+          "propertyType":"",
+          "createdAt": date.toISOString(),
+      
+      }, {
         headers: {
-          'Content-Type': 'multipart/form-data',
-          'Authorization': `Bearer ${token}`
+         'Accept': 'application/json'
         }
       });
       if (response.status === 201) {
@@ -128,15 +136,15 @@ export function Home() {
   
   const fetchData = async () => {
     setLoading(true)
-    let apiURL = `https://easeri-backend-production.up.railway.app/api/properties/`;
-    const username = localStorage.getItem('username')
-    const token = localStorage.getItem('token')
-    const response = await axios.get(apiURL + username + '/', {
+    let apiURL = `http://localhost:3000/property/`;
+    const userId = localStorage.getItem('userId')
+    // const token = localStorage.getItem('token')
+    const response = await axios.get(apiURL + userId + '/', {
       headers: {
-        'Authorization': `Bearer ${token}`
+        'Accept': 'application/json'
       }
     });
-    setUserProperties(response.data);
+    setUserProperties(response.data['existingProperty']);
     setLoading(false)
   }
 
@@ -146,12 +154,12 @@ export function Home() {
   //check if user is logged in 
    
 
-  useEffect(() => {
-    if (!localStorage.getItem('token')) {
-      navigate('/login')
-    }
-    fetchData()
-  }, [loading])
+  // useEffect(() => {
+  //   if (!localStorage.getItem('token')) {
+  //     navigate('/login')
+  //   }
+  //   fetchData()
+  // }, [loading])
 
 
   return (
@@ -254,7 +262,7 @@ export function Home() {
               </thead>
               <tbody>
                 {userProperties.map(
-                  ({ id, title, description, subscription_status, created
+                  ({ id, propertyName, description, status, createdAt
                   }, key) => {
                     const className = `py-3 px-5 ${key === authorsTableData.length - 1
                       ? ""
@@ -272,7 +280,7 @@ export function Home() {
                                 color="blue-gray"
                                 className="font-semibold"
                               >
-                                {title}
+                                {propertyName}
                               </Typography>
 
                             </div>
@@ -287,14 +295,14 @@ export function Home() {
                         <td className={className}>
                           <Chip
                             variant="gradient"
-                            color={subscription_status ? "green" : "blue-gray"}
-                            value={subscription_status ? "SUBSCRIBED" : "PENDING"}
+                            color={status ? "blue-gray" : "green"}
+                            value={status ? "Pending" : "Subscribed"}
                             className="py-0.5 px-2 text-[11px] font-medium"
                           />
                         </td>
                         <td className={className}>
                           <Typography className="text-xs font-semibold text-blue-gray-600">
-                            {created}
+                            {createdAt ? formatDate(createdAt) : "N/A"}
                           </Typography>
                         </td>
                         <td className={className}>

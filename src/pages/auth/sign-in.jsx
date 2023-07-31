@@ -27,17 +27,18 @@ export function SignIn() {
 
   const login = async (e) => {
     e.preventDefault();
-    let loginURL = "https://easeri-backend-production.up.railway.app/api/users/login/";
-    // let loginURL = "/api/users/login/";
+    let loginURL = "http://localhost:3000/auth/login";
+    // let loginURL = "/api/auth/login/";
     const response = await axios.post(
         loginURL, {
-          "username": email, "password": password
+          "email": email, "password": password
         }
     );
 
     if (response.status === 200) {
-      localStorage.setItem('username', email)
-      localStorage.setItem('token', response.data['access'])
+      console.log(response.data)
+      localStorage.setItem('token', response.data['user']['accessToken'])
+      localStorage.setItem('userId', response.data['user']['userId'])
       navigate("/dashboard/home")
     }
     navigate("/dashboard/home")
@@ -65,7 +66,7 @@ export function SignIn() {
             </CardHeader>
             <form onSubmit={login}>
               <CardBody className="flex flex-col gap-4">
-                <Input type="text" label="Username" size="lg" value={email} onChange={handleEmailChange} />
+                <Input type="text" label="Email" size="lg" value={email} onChange={handleEmailChange} />
                 <Input type="password" label="Password" size="lg" value={password} onChange={handlePasswordChange} />
                 <div className="-ml-2.5">
                   <Checkbox label="Remember Me" />
