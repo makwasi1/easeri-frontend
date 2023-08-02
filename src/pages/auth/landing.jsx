@@ -428,6 +428,7 @@ export default function Landing() {
                   <p className="text-gray-500">71 Shelton Street, London, UK</p>
                   <p className="text-gray-500">WC2H 9JH</p>
                   <p className="text-gray-500">Tell: +44 (0) 333 772 1675</p>
+                  <p className="text-gray-500">Tell: +256 (0) 772 439 358</p>
                   <p className="text-gray-500">Email: info@aesari.com</p>
                 </div>
                 <br />

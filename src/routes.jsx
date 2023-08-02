@@ -78,7 +78,7 @@ export const routes = [
         name: "landing",
         path: "/landing",
         element: <Landing />,
-      },
+      }
     ],
   },
 ];

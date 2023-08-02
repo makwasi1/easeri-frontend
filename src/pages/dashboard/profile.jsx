@@ -19,6 +19,15 @@ export function Profile() {
 
   const [user, setUser] = useState('')
   const [userToken, setUserToken] = useState('')
+  
+  const [userDetails, setUserDetails] = useState({
+    name: "John",
+    surname: "Doe",
+    email: "john.doe@example.com",
+    mobile: "123-456-7890",
+    Date: "2000-01-01",
+  });
+  
 
   useEffect(() => {
     const username = localStorage.getItem('username')
@@ -76,13 +85,7 @@ export function Profile() {
             <ProfileInfoCard
               title="Profile Information"
               description=""
-              details={{
-                "first name": user,
-                mobile: "",
-                email: "",
-                location: "",
-               
-              }}
+              details={userDetails}
               action={
                 <Tooltip content="Edit Profile">
                   <PencilIcon className="h-4 w-4 cursor-pointer text-blue-gray-500" />
