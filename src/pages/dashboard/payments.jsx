@@ -3,53 +3,24 @@ import {
   CardHeader,
   CardBody,
   Typography,
-  Avatar,
-  Chip,
-  Button,
   Dialog,
-  DialogHeader,
-  DialogBody,
-  DialogFooter,
-  Input,
-  Select,
-  Option,
-  Textarea,
-  Tabs,
-  TabsHeader,
-  TabsBody,
-  Tab,
-  TabPanel,
+  Button,
 } from "@material-tailwind/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
-import { authorsTableData } from "@/data";
-import React, { Fragment, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 // import { useCountries } from "use-react-countries";
-import {
-  BanknotesIcon,
-  CreditCardIcon,
-  LockClosedIcon,
-} from "@heroicons/react/24/solid";
 import {
   IconButton,
   Menu,
   MenuHandler,
   MenuList,
   MenuItem,
-  Tooltip,
   Progress,
 } from "@material-tailwind/react";
-import { ClockIcon, CheckIcon, ArrowUpIcon } from "@heroicons/react/24/outline";
-import { StatisticsCard } from "@/widgets/cards";
-import { StatisticsChart } from "@/widgets/charts";
-import {
-  statisticsCardsData,
-  statisticsChartsData,
-  projectsTableData,
-  ordersOverviewData,
-} from "@/data";
+import { ArrowUpIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
-
+import SubscriptionButton from "../../utils/subscriptionButton";
 
 
 function formatCardNumber(value) {
@@ -88,79 +59,48 @@ export function PaymentsTable() {
   const [cardExpires, setCardExpires] = React.useState("");
   const [fee, setFee] = React.useState(0);
   const [plan, setPlan] = React.useState("bronze");
-  const [userId, setUserId] = useState('');
+  const [user, setUser] = useState('');
   const [userToken, setUserToken] = useState('');
   const [paymentUrl, setPaymentUrl] = useState('');
-  const [loading , setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [payments, setPayments] = useState([]);
 
 
   const handleOpen = () => setOpen(!open);
-  // const apiURL = `https://easeri-backend-production.up.railway.app/api/properties/`;
 
   useEffect(() => {
-    const username = localStorage.getItem('userId')
-    const token = localStorage.getItem('token')
-    setUserId(username);
-    setUserToken(token);
-    // fetchData();
+
+
+    // setUser(userId);
+    // setUserToken(token);
+    fetchPayments();
   }, []);
 
-  const fetchData = async () => {
+  const fetchPayments = async () => {
 
-    // let apiURL = `https://easeri-backend-production.up.railway.app/api/properties/`;
-    let apiURL = `http://localhost:3000/payments/create/billing-request`;
-   
-    const response = await axios.get(apiURL + username + '/', {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    });
-    setUserProperties(response.data);
+    const userId = localStorage.getItem('userId')
+    const token = localStorage.getItem('token')
+
+    let apiURL = `https://difficult-slug-headscarf.cyclic.app/payments/user-payments/`;
+    try {
+      const response = await axios.get(apiURL + userId, {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      setPayments(response.data['data']);
+    } catch (error) {
+      console.error(error);
+    }
+
 
   }
 
   //create a billing request
-  const  createBillingRequest = async (price, subPlan) => {
-    let apiURL = `https://difficult-slug-headscarf.cyclic.app/payments/create/billing-request`;
-    setLoading(true);
-    
-    try {
-      const response = await fetch(apiURL , {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${userToken}`
-        },
-        body: JSON.stringify({
-          userId: userId,
-          amount: price,
-          currency: "GBP",
-          description: subPlan,
-          status: " ",
-          billingReference: " "
-        })
-      });
-      
-      if (!response.ok) {
-        throw new Error('Something went wrong');
-      }
 
-      if(response.status === 201){
-        const data = await response.json();
-        setPaymentUrl(data["data"]);
-        //open the payment url
-        window.open(paymentUrl);
-        setLoading(false);
-      } else {
-        setLoading(false);
-        throw new Error('Something went wrong');
-      }
-      
-    } catch (error) {
-      setLoading(false);
-      throw new Error('Something went wrong');
-    }
-  }
 
 
   return (
@@ -175,9 +115,7 @@ export function PaymentsTable() {
             <Typography variant="h5" color="blue-gray" className="mb-8">
               $49/year
             </Typography>
-            <Button size="sm" onClick={() => createBillingRequest( '49000', 'Bronze Plan')} ripple variant="gradient" color="blue">
-              Select Plan
-            </Button>
+            <SubscriptionButton plan="Bronze" price="4900" color="blue" />
           </CardBody>
         </Card>
 
@@ -192,10 +130,7 @@ export function PaymentsTable() {
             <Typography variant="h5" color="blue-gray" className="mb-8">
               $149/year
             </Typography>
-            (loading ? <div className="flex items-center justify-center"> <Progress color="blue" size="sm" /> </div> : null)
-            <Button size="sm" onClick={() => createBillingRequest( '14900', 'Gold Plan')} ripple variant="gradient" color="yellow">
-              Select Plan
-            </Button>
+            <SubscriptionButton plan="Gold" price="14900" color="yellow" />
           </CardBody>
         </Card>
 
@@ -207,9 +142,8 @@ export function PaymentsTable() {
             <Typography variant="h5" color="blue-gray" className="mb-8">
               $249/year
             </Typography>
-            <Button size="sm" onClick={() => createBillingRequest( '24900', 'Platinum Plan')} ripple variant="gradient" color="green">
-              Select Plan
-            </Button>
+
+            <SubscriptionButton plan="platinum" price="24900" color="green" />
           </CardBody>
         </Card>
       </div>
@@ -270,7 +204,7 @@ export function PaymentsTable() {
           <table className="w-full min-w-[640px] table-auto">
             <thead>
               <tr>
-                {["Item", "Amount", "Completion"].map((el) => (
+                {["REF", "Amount", "Status", "Expiry Date"].map((el) => (
                   <th
                     key={el}
                     className="border-b border-blue-gray-50 py-3 px-6 text-left"
@@ -286,7 +220,67 @@ export function PaymentsTable() {
               </tr>
             </thead>
             <tbody>
-              {/* Table rows */}
+              {/* create table rows here */}
+              {payments?.map(
+                ({ billingReference, amount, status, date }, key) => {
+                  const className = `py-3 px-5 ${key === payments?.length - 1
+                    ? ""
+                    : "border-b border-blue-gray-50"
+                    }`;
+
+                  return (
+
+                    <tr key={billingReference}>
+                      <td className={className}>
+                        <div className="flex items-center gap-4">
+                          {/*<Avatar src={img} alt={name} size="sm" />*/}
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-bold"
+                          >
+                            {billingReference}
+                          </Typography>
+                        </div>
+                      </td>
+
+                      <td className={className}>
+                        <Typography
+                          variant="small"
+                          className="text-xs font-medium text-blue-gray-600"
+                        >
+                          {amount}
+                        </Typography>
+                      </td>
+                      <td className={className}>
+                        <div className="w-10/12">
+                          <Typography
+                            variant="small"
+                            className="mb-1 block text-xs font-medium text-blue-gray-600"
+                          >
+
+                          </Typography>
+                          <Button
+                            value={status}
+                            variant="gradient"
+                            color={status === 'pending' ? "blue" : "green"}
+
+                          > {status} </Button>
+                        </div>
+                      </td>
+                      <td className={className}>
+                        <Typography
+                          variant="small"
+                          className="text-xs font-medium text-blue-gray-600"
+                        >
+                          {date}
+                        </Typography>
+                      </td>
+                    </tr>
+                  );
+                }
+              )}
+
             </tbody>
           </table>
         </CardBody>
