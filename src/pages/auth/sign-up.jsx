@@ -32,7 +32,7 @@ export function SignUp() {
 
     e.preventDefault();
     // const loginURL = "https://easeri-backend-production.up.railway.app/api/users/register/";
-    const loginURL = "http://localhost:3000/auth/register/";
+    const loginURL = "https://difficult-slug-headscarf.cyclic.app/auth/register/";
     if(password === passwordConfirm){
       const response = await axios.post(
           loginURL, {
@@ -40,6 +40,7 @@ export function SignUp() {
           }
       );
       if(response.status === 201 || response.status === 200){
+          alert('Successfuly registered. Please check your email to confirm your account.')
           navigate("/auth/sign-in")
       } else {
         alert('Something went wrong. Try again.')

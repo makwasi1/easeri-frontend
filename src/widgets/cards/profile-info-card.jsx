@@ -37,7 +37,7 @@ export function ProfileInfoCard({ title, description, details, action }) {
   const updateUser = async () => {
     console.log('update user', detail);
     //submit to backend with axios and a post request with a body and auth token bearer token 
-    const response = await fetch(`http://localhost:3000/users/profile/update`, {
+    const response = await fetch(`https://difficult-slug-headscarf.cyclic.app/users/profile/update`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

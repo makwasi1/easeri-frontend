@@ -70,7 +70,7 @@ export function Home() {
   };
 
   const handleCreateProperty = async (event) => {
-    let apiURL = `http://localhost:3000/property/`;
+    let apiURL = `https://difficult-slug-headscarf.cyclic.app/property/`;
     event.preventDefault();
     const token = localStorage.getItem('token')
     const userId = localStorage.getItem('userId')
@@ -136,7 +136,7 @@ export function Home() {
   
   const fetchData = async () => {
     setLoading(true)
-    let apiURL = `http://localhost:3000/property/`;
+    let apiURL = `https://difficult-slug-headscarf.cyclic.app/property/`;
     const userId = localStorage.getItem('userId')
     // const token = localStorage.getItem('token')
     const response = await axios.get(apiURL + userId + '/', {

@@ -27,7 +27,7 @@ export function SignIn() {
 
   const login = async (e) => {
     e.preventDefault();
-    let loginURL = "http://localhost:3000/auth/login";
+    let loginURL = "https://difficult-slug-headscarf.cyclic.app/auth/login";
     // let loginURL = "/api/auth/login/";
     const response = await axios.post(
         loginURL, {
