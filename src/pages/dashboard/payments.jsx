@@ -1,3 +1,4 @@
+import React, { Fragment, useEffect, useState } from "react";
 import {
   Card,
   CardHeader,
@@ -7,7 +8,6 @@ import {
   Button,
 } from "@material-tailwind/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
-import React, { useState, useEffect } from "react";
 import axios from 'axios';
 // import { useCountries } from "use-react-countries";
 import {
@@ -23,37 +23,11 @@ import { useNavigate } from "react-router-dom";
 import SubscriptionButton from "../../utils/subscriptionButton";
 
 
-function formatCardNumber(value) {
-  const val = value.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
-  const matches = val.match(/\d{4,16}/g);
-  const match = (matches && matches[0]) || "";
-  const parts = [];
 
-  for (let i = 0, len = match.length; i < len; i += 4) {
-    parts.push(match.substring(i, i + 4));
-  }
-
-  if (parts.length) {
-    return parts.join(" ");
-  } else {
-    return value;
-  }
-}
-
-function formatExpires(value) {
-  return value
-    .replace(/[^0-9]/g, "")
-    .replace(/^([2-9])$/g, "0$1")
-    .replace(/^(1{1})([3-9]{1})$/g, "0$1/$2")
-    .replace(/^0{1,}/g, "0")
-    .replace(/^([0-1]{1}[0-9]{1})([0-9]{1,2}).\*/g, "$1/$2");
-}
 
 export function PaymentsTable() {
   const [open, setOpen] = useState(false);
   const [userProperties, setUserProperties] = useState([])
-  const navigate = useNavigate();
-  // const { countries } = useCountries();
   const [type, setType] = React.useState("card");
   const [cardNumber, setCardNumber] = React.useState("");
   const [cardExpires, setCardExpires] = React.useState("");
@@ -69,19 +43,13 @@ export function PaymentsTable() {
   const handleOpen = () => setOpen(!open);
 
   useEffect(() => {
-
-
-    // setUser(userId);
-    // setUserToken(token);
     fetchPayments();
   }, []);
 
   const fetchPayments = async () => {
-
+    const apiURL = `https://difficult-slug-headscarf.cyclic.app/payments/user-payments/`;
     const userId = localStorage.getItem('userId')
     const token = localStorage.getItem('token')
-
-    let apiURL = `https://difficult-slug-headscarf.cyclic.app/payments/user-payments/`;
     try {
       const response = await axios.get(apiURL + userId, {
         headers: {
@@ -90,18 +58,11 @@ export function PaymentsTable() {
           'Authorization': `Bearer ${token}`
         }
       });
-
       setPayments(response.data['data']);
     } catch (error) {
       console.error(error);
     }
-
-
   }
-
-  //create a billing request
-
-
 
   return (
     <div className="mb-4 mt-12">
@@ -221,9 +182,9 @@ export function PaymentsTable() {
             </thead>
             <tbody>
               {/* create table rows here */}
-              {payments?.map(
+              {payments.map(
                 ({ billingReference, amount, status, date }, key) => {
-                  const className = `py-3 px-5 ${key === payments?.length - 1
+                  const className = `py-3 px-5 ${key === authorsTableData.length - 1
                     ? ""
                     : "border-b border-blue-gray-50"
                     }`;

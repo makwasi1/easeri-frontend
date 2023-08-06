@@ -9,6 +9,7 @@ import {
   Checkbox,
   Button,
   Typography,
+  Spinner
 } from "@material-tailwind/react";
 
 import axios from "axios";
@@ -16,6 +17,7 @@ import axios from "axios";
 export function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false)
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -27,6 +29,7 @@ export function SignIn() {
 
   const login = async (e) => {
     e.preventDefault();
+    setLoading(true)
     let loginURL = "https://difficult-slug-headscarf.cyclic.app/auth/login";
     // let loginURL = "/api/auth/login/";
     const response = await axios.post(
@@ -36,7 +39,7 @@ export function SignIn() {
     );
 
     if (response.status === 200) {
-      console.log(response.data)
+      setLoading(false)
       localStorage.setItem('token', response.data['user']['accessToken'])
       localStorage.setItem('userId', response.data['user']['userId'])
       navigate("/dashboard/home")
@@ -46,6 +49,16 @@ export function SignIn() {
 
  
   const navigate = useNavigate();
+
+  //text widget
+  const Text = () => {
+    return (
+        <Typography variant="button" color="white">
+          Sign In
+        </Typography>
+    )
+  }
+
   return (
       <>
         <img
@@ -73,13 +86,16 @@ export function SignIn() {
                 </div>
               </CardBody>
               <CardFooter className="pt-0">
-                <Button
+                {/* //add spinner  */}
+             
+
+                 <Button
                     // onClick={() => login()}
                     variant="gradient"
                     type="submit"
                     fullWidth
                 >
-                  Sign In
+                 Sign In
                 </Button>
 
                 <Typography variant="small" className="mt-6 flex justify-center">

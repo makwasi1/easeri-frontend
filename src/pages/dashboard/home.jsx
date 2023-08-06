@@ -45,7 +45,6 @@ export function Home() {
   const [user, setUser] = useState('')
   const [userToken, setUserToken] = useState('')
   const [selectedFile, setSelectedFile] = useState(null)
-  const navigate = useNavigate();
 
 
   // const apiURL = `https://easeri-backend-production.up.railway.app/api/properties/`;
@@ -72,7 +71,6 @@ export function Home() {
   const handleCreateProperty = async (event) => {
     let apiURL = `https://difficult-slug-headscarf.cyclic.app/property/`;
     event.preventDefault();
-    const token = localStorage.getItem('token')
     const userId = localStorage.getItem('userId')
     setLoading(true)
     //create a date object
@@ -150,17 +148,6 @@ export function Home() {
 
   const handleOpen = () => setOpen(!open);
   const handleOpenEdit = () => setEdit(!edit);
-
-  //check if user is logged in 
-   
-
-  // useEffect(() => {
-  //   if (!localStorage.getItem('token')) {
-  //     navigate('/login')
-  //   }
-  //   fetchData()
-  // }, [loading])
-
 
   return (
     <div className="mt-12">

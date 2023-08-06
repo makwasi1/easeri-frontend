@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { Button } from "@material-tailwind/react";
+import axios from 'axios';
 
 const SubscriptionButton = ({ plan, price, color }) => {
 
@@ -16,47 +17,81 @@ const SubscriptionButton = ({ plan, price, color }) => {
         // fetchData();
       }, []);
 
-    const createBillingRequest = async (price, subPlan) => {
+      const createBillingRequest = async (price, subPlan) => {
         let apiURL = `https://difficult-slug-headscarf.cyclic.app/payments/create/billing-request`;
-        setLoading(true);
-
+        event.preventDefault();
+        const userId = localStorage.getItem('userId')
+        setLoading(true)
+        //create a date object
+        const date = new Date();
+    
         try {
-            const response = await fetch(apiURL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${userToken}`
-                },
-                body: JSON.stringify({
-                    userId: userId,
-                    amount: price,
-                    currency: "GBP",
-                    description: subPlan,
-                    status: " ",
-                    billingReference: " "
-                })
-            });
-
-            if (!response.ok) {
-                throw new Error('Something went wrong');
+          const response = await axios.post(apiURL, {
+          
+            "userId": userId,
+            "amount": price,
+            "currency": "GBP",
+            "description": subPlan,
+            "status": " ",
+          
+          }, {
+            headers: {
+             'Accept': 'application/json',
+             'Authorization': `Bearer ${userToken}`
             }
-
-            if (response.status === 201) {
-                const data = await response.json();
-                setPaymentUrl(data["data"]);
-                //open the payment url
-                setLoading(false);
-                return data["data"];
-            } else {
-                setLoading(false);
-                throw new Error('Something went wrong');
-            }
-
+          });
+          if (response.status === 201) {
+            alert("Payment in progress.")
+            setPaymentUrl(response.data["data"]);
+            
+          }
         } catch (error) {
-            setLoading(false);
-            throw new Error('Something went wrong');
+          setLoading(false)
+          console.error(error);
         }
-    }
+      }
+
+    // const createBillingRequest = async (price, subPlan) => {
+    //     let apiURL = `https://difficult-slug-headscarf.cyclic.app/payments/create/billing-request`;
+    //     setLoading(true);
+
+    //     try {
+    //         const response = await fetch(apiURL, {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //                 'Authorization': `Bearer ${userToken}`
+    //             },
+    //             body: JSON.stringify({
+    //                 userId: userId,
+    //                 amount: price,
+    //                 currency: "GBP",
+    //                 description: subPlan,
+    //                 status: " ",
+    //                 billingReference: " "
+    //             })
+    //         });
+
+    //         if (!response.ok) {
+    //             throw new Error('Something went wrong');
+    //         }
+
+    //         if (response.status === 201) {
+    //             const data = await response.json();
+    //             setPaymentUrl(data["data"]);
+    //             //open the payment url
+    //             setLoading(false);
+    //             return data["data"];
+    //         } else {
+    //             setLoading(false);
+    //             throw new Error('Something went wrong');
+    //         }
+
+    //     } catch (error) {
+    //         setLoading(false);
+    //         throw new Error('Something went wrong');
+    //     }
+    // }
 
     const handleSubscription = async () => {
         try {
