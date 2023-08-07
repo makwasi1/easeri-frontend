@@ -95,7 +95,7 @@ export function SignIn() {
                     type="submit"
                     fullWidth
                 >
-                 Sign In
+                {loading ? 'Logging In...' : 'Login'}
                 </Button>
 
                 <Typography variant="small" className="mt-6 flex justify-center">

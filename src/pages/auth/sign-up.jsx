@@ -23,13 +23,14 @@ export function SignUp() {
   const [passwordConfirm, setPasswordConfirm] = useState('')
   const [openAlert, setOpenAlert] = useState(false)
   const [open, setOpen] = useState(true);
+  const [loading, setLoading] = useState(false)
 
   const handleChange = (setState) => (event) => {
     setState(event.target.value)
   }
 
   const onSubmit = async (e) => {
-
+    setLoading(true)
     e.preventDefault();
     // const loginURL = "https://easeri-backend-production.up.railway.app/api/users/register/";
     const loginURL = "https://difficult-slug-headscarf.cyclic.app/auth/register/";
@@ -40,8 +41,9 @@ export function SignUp() {
           }
       );
       if(response.status === 201 || response.status === 200){
-          alert('Successfuly registered. Please check your email to confirm your account.')
-          navigate("/auth/sign-in")
+          alert('Successfuly registered. Please check your email to confirm your registration.')
+          setLoading(false)
+          // navigate("/auth/sign-in")
       } else {
         alert('Something went wrong. Try again.')
       }
@@ -85,7 +87,7 @@ export function SignUp() {
           </CardBody>
           <CardFooter className="pt-0">
             <Button type={"submit"} variant="gradient" fullWidth>
-              Sign Up
+            {loading ? 'Signing up...' : 'Sign Up'}
             </Button>
             <Typography variant="small" className="mt-6 flex justify-center">
               Already have an account?

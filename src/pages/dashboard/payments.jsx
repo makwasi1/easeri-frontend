@@ -67,7 +67,6 @@ export function PaymentsTable() {
   return (
     <div className="mb-4 mt-12">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-        {/* Subscription Plan Cards */}
         <Card className="p-4 border border-blue-400 rounded-lg">
           <CardBody className="flex flex-col items-center">
             <Typography variant="h6" color="blue-gray" className="mb-4">
@@ -184,7 +183,7 @@ export function PaymentsTable() {
               {/* create table rows here */}
               {payments.map(
                 ({ billingReference, amount, status, date }, key) => {
-                  const className = `py-3 px-5 ${key === authorsTableData.length - 1
+                  const className = `py-3 px-5 ${key === payments.length - 1
                     ? ""
                     : "border-b border-blue-gray-50"
                     }`;
